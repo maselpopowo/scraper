@@ -26,6 +26,8 @@ jobs:
             pages: 10
           - city: gdansk
             pages: 10
+          - city: szczecin
+            pages: 10
 
     steps:
       - name: Checkout repo
