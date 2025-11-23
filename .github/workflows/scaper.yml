@@ -54,13 +54,11 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config pull.rebase true
           
-          # Synchronizuj przed commitem (max-parallel: 1 zapewnia sekwencyjność, ale pull jest bezpieczny)
-          git pull --rebase origin main || true
-          
           git add -f data/ogloszenia_${{ matrix.city }}.csv
           if git diff --staged --quiet; then
             echo "No changes to commit for ${{ matrix.city }}"
           else
             git commit -m "Update scraped data for ${{ matrix.city }} [$(date +'%Y-%m-%d %H:%M:%S')]"
+            git pull --rebase origin main || true
             git push origin main
           fi
